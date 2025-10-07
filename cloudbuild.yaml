@@ -10,6 +10,23 @@ steps:
     args: ['push',
            'us-central1-docker.pkg.dev/boreal-quarter-474321-s9/nana-100957828/assignment2:${SHORT_SHA}']
 
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'assignment2'
+      - '--image'
+      - 'us-central1-docker.pkg.dev/boreal-quarter-474321-s9/nana-100957828/assignment2:${SHORT_SHA}'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '3000'
+
 images:
   - 'us-central1-docker.pkg.dev/boreal-quarter-474321-s9/nana-100957828/assignment2:${SHORT_SHA}'
 
